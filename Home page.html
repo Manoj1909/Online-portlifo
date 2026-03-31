@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>NGAPro | Full Stack Developer Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Poppins', Arial, sans-serif;
+    }
+
+    body {
+      background: #eef5f5;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #0a4c4c, #1f7a7a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #1f7a7a, #0a4c4c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 900;
+    }
+
+    nav {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #1e3a3a;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: 0.2s;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0e6b6b;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #0e6b6b;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 40px;
+      background: #1e6f6f;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background: #0e5555;
+      transform: translateY(-2px);
+    }
+
+    .btn.light {
+      background: #5f9e9e;
+    }
+
+    .btn.dark {
+      background: #004d4d;
+    }
+
+    /* menu toggle (hamburger) */
+    .menu-toggle {
+      display: none;
+      font-size: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #1e6f6f;
+      transition: 0.2s;
+    }
+
+    /* HOME */
+    .home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 60px;
+      gap: 40px;
+      background: linear-gradient(145deg, #eef5f5 0%, #e4f0f0 100%);
+    }
+
+    .home .left {
+      width: 55%;
+    }
+
+    .home .left h1 {
+      font-size: 3.2rem;
+      color: #1e4a4a;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .home .left p {
+      font-size: 1.2rem;
+      color: #3a5e5e;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .home .right img {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.2);
+      border: 5px solid white;
+    }
+
+    /* ABOUT */
+    .about {
+      display: flex;
+      padding: 70px 60px;
+      align-items: center;
+      background: #fffbf5;
+      gap: 50px;
+    }
+
+    .about img {
+      width: 280px;
+      border-radius: 32px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+
+    .about .content {
+      flex: 1;
+    }
+
+    .about .content h2 {
+      color: #1e6f6f;
+      letter-spacing: 2px;
+      font-size: 1.5rem;
+    }
+
+    .about .content h1 {
+      font-size: 2.6rem;
+      color: #1e3a3a;
+      margin: 15px 0;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 70px 60px;
+      text-align: center;
+      background: #eef5f5;
+    }
+
+    .services h2 {
+      font-size: 2.5rem;
+      color: #1e4a4a;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 28px;
+      transition: 0.3s;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 35px rgba(0, 70, 70, 0.15);
+    }
+
+    .card h1 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      color: #1f6e6e;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 180px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    /* SKILL SECTION */
+    .skill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 60px;
+      background: #fffbf5;
+      gap: 40px;
+    }
+
+    .skills-left {
+      width: 55%;
+    }
+
+    .skills-left h2 {
+      font-size: 2.2rem;
+      color: #1e4a4a;
+      margin-bottom: 35px;
+    }
+
+    .skills-left span {
+      display: inline-block;
+      margin: 10px 12px;
+      padding: 12px 28px;
+      background: #1e6f6f;
+      color: white;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .skills-left span:hover {
+      background: #0a5555;
+      transform: scale(1.02);
+    }
+
+    .skill-right {
+      width: 40%;
+      text-align: center;
+    }
+
+    .skill-right img {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid white;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    /* WORK GALLERY */
+    .work {
+      padding: 70px 60px;
+      text-align: center;
+      background: #eef5f5;
+    }
+
+    .work h1 {
+      font-size: 2.7rem;
+      color: #1e4a4a;
+      margin-bottom: 40px;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .gallery img {
+      width: 320px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 28px;
+      transition: 0.3s;
+      box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+      border: 3px solid white;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
+
+    /* SCROLL TO TOP BUTTON */
+    .scroll-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #1e6f6f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: 0.2s;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-top:hover {
+      background: #0a5555;
+      transform: translateY(-3px);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      header {
+        padding: 18px 30px;
+      }
+      .home, .about, .skill, .services, .work {
+        padding: 50px 35px;
+      }
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery img {
+        width: 280px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 25px;
+      }
+
+      .menu-toggle {
+        display: block;
+        z-index: 1100;
+      }
+
+      nav {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+        box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
+        border-radius: 0 0 24px 24px;
+        z-index: 999;
+      }
+
+      nav.active {
+        max-height: 380px;
+        padding: 15px 0;
+        border-top: 1px solid #d4e2e2;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 14px 0;
+        margin: 0;
+        border-bottom: 1px solid #e0efef;
+      }
+
+      nav a:last-child {
+        border-bottom: none;
+      }
+
+      .btn {
+        display: inline-block;
+      }
+
+      .home {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 25px;
+      }
+      .home .left, .home .right {
+        width: 100%;
+      }
+      .home .left h1 {
+        font-size: 2.3rem;
+      }
+      .home .right img {
+        width: 240px;
+        height: 240px;
+      }
+      .buttons {
+        justify-content: center;
+      }
+
+      .about {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about .content {
+        margin-left: 0;
+      }
+
+      .skill {
+        flex-direction: column;
+        text-align: center;
+      }
+      .skills-left, .skill-right {
+        width: 100%;
+      }
+      .skill-right img {
+        width: 220px;
+        height: 220px;
+        margin-top: 25px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card img {
+        max-width: 140px;
+        height: 120px;
+      }
+
+      .gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery img {
+        width: 90%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .home .left h1 {
+        font-size: 1.9rem;
+      }
+      .about .content h1 {
+        font-size: 1.8rem;
+      }
+      .services h2, .work h1, .skills-left h2 {
+        font-size: 1.8rem;
+      }
+      .btn {
+        padding: 8px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MR.<span>Manoj</span></div>
+
+  <nav id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#skill">Skill</a>
+    <a href="#work">Work</a>
+  </nav>
+
+  <button class="btn" id="talkBtn">LET'S TALK</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+</header>
+
+<!-- HOME -->
+<section id="home" class="home">
+  <div class="left">
+    <h1>Hey! I am Web Developer</h1>
+    <p>I am a Full-Stack Developer with experience in Web, Mobile & Desktop apps.</p>
+    <div class="buttons">
+      <button class="btn light" id="learnMoreBtn">Learn More</button>
+      <button class="btn dark" id="hireMeBtn">Hire Me</button>
+    </div>
+  </div>
+  <div class="right">
+    <img src="Manoj.jpeg" alt="profile" onerror="this.src='https://via.placeholder.com/320?text=Profile'">
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="img">
+    <img src="Avathar.jpeg" alt="avatar" onerror="this.src='https://via.placeholder.com/280?text=Avatar'">
+  </div>
+  <div class="content">
+    <h2>About Me</h2>
+    <h1>I Am A Passionate Web Designer</h1>
+    <p>I build modern and responsive websites with clean UI, delivering seamless experiences across all devices. 5+ years of industry expertise.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <h2>What Do I Offer</h2>
+  <div class="cards">
+    <div class="card"><h1>Web Design</h1><img src="Web develop.jpeg" alt="web design" onerror="this.src='https://via.placeholder.com/180?text=Web+Design'"></div>
+    <div class="card"><h1>SEO Specialist</h1><img src="SEO.jpeg" alt="SEO" onerror="this.src='https://via.placeholder.com/180?text=SEO'"></div>
+    <div class="card"><h1>Security Expert</h1><img src="Security.jpeg" alt="security" onerror="this.src='https://via.placeholder.com/180?text=Security'"></div>
+    <div class="card"><h1>Web Development</h1><img src="Web develop.jpeg" alt="web dev" onerror="this.src='https://via.placeholder.com/180?text=Development'"></div>
+    <div class="card"><h1>UI/UX Design</h1><img src="UIUX.jpeg" alt="ui/ux" onerror="this.src='https://via.placeholder.com/180?text=UI/UX'"></div>
+    <div class="card"><h1>Photography</h1><img src="Photo.jpeg" alt="photography" onerror="this.src='https://via.placeholder.com/180?text=Photography'"></div>
+  </div>
+</section>
+
+<!-- SKILL -->
+<section id="skill" class="skill">
+  <div class="skills-left">
+    <h2>⚡ I Am Expert In</h2>
+    <div>
+      <span>HTML5</span>
+      <span>CSS3</span>
+      <span>JavaScript</span>
+      <span>PHP</span>
+      <span>React.js</span>
+      <span>Node.js</span>
+      <span>Python</span>
+      <span>MongoDB</span>
+    </div>
+  </div>
+  <div class="skill-right">
+    <img src="Avathar.jpeg" alt="skill profile" onerror="this.src='https://via.placeholder.com/280?text=Expertise'">
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work">
+  <h1>My Work</h1>
+  <div class="gallery">
+    <img src="Quiz.jfif" alt="quiz project" onerror="this.src='https://via.placeholder.com/320x220?text=Quiz+App'">
+    <img src="Langing Page.png" alt="landing page" onerror="this.src='https://via.placeholder.com/320x220?text=Landing+Page'">
+    <img src="Student List.png" alt="student list" onerror="this.src='https://via.placeholder.com/320x220?text=Student+Manager'">
+  </div>
+</section>
+
+<script>
+  (function() {
+    // ----- SMOOTH SCROLL for all nav links + any other hash links -----
+    const allNavLinks = document.querySelectorAll('nav a');
+    const menuToggleBtn = document.getElementById('menuToggle');
+    const navContainer = document.getElementById('navLinks');
+
+    // Helper smooth scroll function
+    function smoothScrollToElement(targetId) {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Close mobile menu after clicking a link (if menu is open)
+        if (navContainer && navContainer.classList.contains('active')) {
+          navContainer.classList.remove('active');
+        }
+      }
+    }
+
+    // Add click event to each nav link
+    allNavLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const hash = this.getAttribute('href'); // e.g., "#home"
+        if (hash && hash.startsWith('#')) {
+          smoothScrollToElement(hash);
+          // Update URL without jumping
+          history.pushState(null, null, hash);
+        }
+      });
+    });
+
+    // Also handle "LET'S TALK" button - scroll to contact / or just alert
+    const talkBtn = document.getElementById('talkBtn');
+    if (talkBtn) {
+      talkBtn.addEventListener('click', () => {
+        alert("📞 Let's connect! Email: hello@ngapro.com | Feel free to reach out.");
+      });
+    }
+
+    // Learn More button -> scroll to about section
+    const learnBtn = document.getElementById('learnMoreBtn');
+    if (learnBtn) {
+      learnBtn.addEventListener('click', () => {
+        smoothScrollToElement('#about');
+      });
+    }
+
+    // Hire Me button -> scroll to skill / work section
+    const hireBtn = document.getElementById('hireMeBtn');
+    if (hireBtn) {
+      hireBtn.addEventListener('click', () => {
+        smoothScrollToElement('#skill');
+      });
+    }
+
+    // SCROLL TO TOP BUTTON (existing and improved)
+    const scrollBtn = document.createElement("button");
+    scrollBtn.innerText = "↑";
+    scrollBtn.classList.add("scroll-top");
+    document.body.appendChild(scrollBtn);
+    
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Show/hide scroll button based on scroll position
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        scrollBtn.style.display = "flex";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    });
+    scrollBtn.style.display = "none"; // initially hidden
+
+    // ---------- MENU TOGGLE (HAMBURGER) fully functional ----------
+    if (menuToggleBtn && navContainer) {
+      menuToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navContainer.classList.toggle('active');
+      });
+
+      // Optional: close menu if click outside (improves UX)
+      document.addEventListener('click', function(event) {
+        const isClickInsideNav = navContainer.contains(event.target);
+        const isClickOnToggle = menuToggleBtn.contains(event.target);
+        if (!isClickInsideNav && !isClickOnToggle && navContainer.classList.contains('active')) {
+          navContainer.classList.remove('active');
+        }
+      });
+    }
+
+    // Fix for any broken images (graceful fallback already via onerror)
+    // Also ensure that if the URL hash is present on load, we scroll to that section
+    if (window.location.hash) {
+      const targetId = window.location.hash;
+      setTimeout(() => {
+        const targetElem = document.querySelector(targetId);
+        if (targetElem) {
+          targetElem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+
+    // additional touch: when window resizes above 768px, remove active class to avoid stuck menu
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768 && navContainer.classList.contains('active')) {
+        navContainer.classList.remove('active');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
